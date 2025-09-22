@@ -9,7 +9,7 @@ const Urls: URLS = {
   HOME: '/',
   SELECCION_PLAN: '/seleccion-plan',
   RESUMEN: '/resumen',
-  NOT_FOUND: ''
+  NOT_FOUND: '*'
 }
 
 export default Urls
