@@ -11,7 +11,7 @@ import CustomerCardSkeleton from "../../components/skeleton/CustomerCardSkeleton
 import PlanCardSkeleton from "../../components/skeleton/PlanCardSkeleton";
 
 const PlanSelection = () => {
-  const { addPlan } = useStore();
+  const { addPlan, user } = useStore();
   const navigate = useNavigate();
   const [forWhom, setForWhom] = useState("");
   const { data, isLoading } = useFetchPlans();
@@ -62,67 +62,89 @@ const PlanSelection = () => {
   );
 
   return (
-    <div className="w-full px-[216px] py-16 pb-28 flex-1 max-md:px-6 max-md:py-8 max-md:pb-5">
-      <a
-        className="flex mb-8 font-semibold text-lg tracking-[0.4px] leading-5 text-[#4F4FFF] cursor-pointer"
-        onClick={() => navigate(-1)}
-      >
-        <span className="mr-2">
-          <BackIcon />
-        </span>{" "}
-        Volver
-      </a>
-      <div className="text-center w-full max-w-[544px] mx-auto mb-8">
-        <h2 className="text-[40px] leading-12 tracking-[-0.6px] font-semibold mb-2 max-md:text-[32px]">
-          Rocío ¿Para quién deseas cotizar?
-        </h2>
-        <p className="text-base leading-7 tracking-[0.1px] font-normal">
-          Selecciona la opción que se ajuste más a tus necesidades.
-        </p>
+    <div className="w-full flex-1">
+      {/* Contenedor principal limitado a 1280px */}
+      <div className="bg-[#EDEFFC] h-14 flex items-center justify-center text-base gap-4 max-sm:hidden">
+        <span className="bg-[#4F4FFF] rounded-[50px] py-1 px-3 text-white font-normal flex items-center">
+          1
+        </span>
+        <span className="font-semibold">Planes y coberturas</span>
+        <span className="text-[#7981B2]">- - - - -</span>
+        <span className="text-[#7981B2] border border-[#7981B2] rounded-full py-1 px-3">
+          2
+        </span>
+        <span className="text-[#7981B2]">Resumen</span>
       </div>
+      <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-16 xl:px-24 py-16 pb-28 max-md:py-8 max-md:pb-5">
+        {/* Botón Volver */}
+        <a
+          className="flex mb-8 font-semibold text-lg tracking-[0.4px] leading-5 text-[#4F4FFF] cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
+          <span className="mr-2">
+            <BackIcon />
+          </span>{" "}
+          Volver
+        </a>
 
-      <div className="max-w-[544px] w-full flex justify-between mx-auto flex-wrap">
-        {isLoading ? (
-          // Mostrar skeletons mientras carga
-          <>
-            <CustomerCardSkeleton />
-            <CustomerCardSkeleton />
-          </>
-        ) : (
-          // Mostrar tarjetas reales cuando termina de cargar
-          userMy.map((item, index) => (
-            <CustomerCard
-              onChange={onChangeCustomerCard}
-              key={index}
-              title={item.title}
-              description={item.description}
-              whoUser={item.whoUser}
-              isChecked={forWhom === item.whoUser}
-            />
-          ))
-        )}
-      </div>
-      {forWhom && (
-        <div className="max-w-[928px] w-full flex justify-around mx-auto flex-wrap">
+        {/* Título y descripción */}
+        <div className="text-center w-full max-w-[544px] mx-auto mb-8">
+          <h2 className="text-[40px] leading-12 tracking-[-0.6px] font-semibold mb-2 max-md:text-[32px]">
+            Rocío ¿Para quién deseas cotizar?
+          </h2>
+          <p className="text-base leading-7 tracking-[0.1px] font-normal">
+            Selecciona la opción que se ajuste más a tus necesidades.
+          </p>
+        </div>
+
+        {/* Tarjetas de usuario */}
+        <div className="max-w-[544px] w-full flex justify-between mx-auto flex-wrap gap-4 mb-8">
           {isLoading ? (
-            // Skeleton para planes (si los datos de planes también están cargando)
+            // Mostrar skeletons mientras carga
             <>
-              <PlanCardSkeleton />
-              <PlanCardSkeleton />
-              <PlanCardSkeleton />
+              <CustomerCardSkeleton />
+              <CustomerCardSkeleton />
             </>
           ) : (
-            data?.map((plan, index) => (
-              <PlanCard
-                forWhom={forWhom}
+            // Mostrar tarjetas reales cuando termina de cargar
+            userMy.map((item, index) => (
+              <CustomerCard
+                onChange={onChangeCustomerCard}
                 key={index}
-                onChangePlan={onChangePlan}
-                plan={plan}
+                title={item.title}
+                description={item.description}
+                whoUser={item.whoUser}
+                isChecked={forWhom === item.whoUser}
               />
             ))
           )}
         </div>
-      )}
+
+        {/* Tarjetas de planes */}
+        {forWhom && (
+          <div className="w-full flex justify-center mx-auto">
+            <div className="max-w-[928px] w-full flex justify-around flex-wrap gap-4">
+              {isLoading ? (
+                // Skeleton para planes
+                <>
+                  <PlanCardSkeleton />
+                  <PlanCardSkeleton />
+                  <PlanCardSkeleton />
+                </>
+              ) : (
+                data?.map((plan, index) => (
+                  <PlanCard
+                    forWhom={forWhom}
+                    key={index}
+                    onChangePlan={onChangePlan}
+                    plan={plan}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
