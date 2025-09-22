@@ -11,7 +11,7 @@ import CustomerCardSkeleton from "../../components/skeleton/CustomerCardSkeleton
 import PlanCardSkeleton from "../../components/skeleton/PlanCardSkeleton";
 
 const PlanSelection = () => {
-  const { addPlan, user } = useStore();
+  const { addPlan } = useStore();
   const navigate = useNavigate();
   const [forWhom, setForWhom] = useState("");
   const { data, isLoading } = useFetchPlans();
