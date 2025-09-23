@@ -7,7 +7,6 @@ const Summary = () => {
 
   return (
     <div className="w-full flex-1">
-      {/* Breadcrumb - Ocupa toda la pantalla */}
       <div className="bg-[#EDEFFC] h-14 flex items-center justify-center text-base gap-4 max-sm:hidden">
         <span className="text-[#7981B2] border border-[#7981B2] rounded-full py-1 px-3">
           1
@@ -19,8 +18,6 @@ const Summary = () => {
         </span>
         <span className="font-semibold">Resumen</span>
       </div>
-
-      {/* Contenedor del contenido - Limitado a 1280px con más margen */}
       <div className="w-full max-w-[1280px] mx-auto px-8 lg:px-20 xl:px-32 py-16 pb-28 max-md:px-6 max-md:py-8 max-md:pb-5">
         <a
           className="flex mb-8 font-semibold text-lg tracking-[0.4px] leading-5 text-[#4F4FFF] cursor-pointer"

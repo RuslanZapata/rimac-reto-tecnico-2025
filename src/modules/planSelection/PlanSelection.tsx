@@ -2,7 +2,6 @@ import BackIcon from "../../assets/icon/BackIcon";
 import PlanCard from "../../components/PlanCard";
 import CustomerCard from "../../components/CustomerCard";
 import { useCallback, useState } from "react";
-// import { getPlansServiceApi } from "../../core/service/plans";
 import { useNavigate } from "react-router";
 import type { DataPlan } from "../../core/interfaces/plan.interface";
 import { useFetchPlans } from "../../core/hook/usePlans";
@@ -63,7 +62,6 @@ const PlanSelection = () => {
 
   return (
     <div className="w-full flex-1">
-      {/* Contenedor principal limitado a 1280px */}
       <div className="bg-[#EDEFFC] h-14 flex items-center justify-center text-base gap-4 max-sm:hidden">
         <span className="bg-[#4F4FFF] rounded-[50px] py-1 px-3 text-white font-normal flex items-center">
           1
@@ -76,7 +74,6 @@ const PlanSelection = () => {
         <span className="text-[#7981B2]">Resumen</span>
       </div>
       <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-16 xl:px-24 py-16 pb-28 max-md:py-8 max-md:pb-5">
-        {/* Botón Volver */}
         <a
           className="flex mb-8 font-semibold text-lg tracking-[0.4px] leading-5 text-[#4F4FFF] cursor-pointer"
           onClick={() => navigate(-1)}
@@ -86,8 +83,6 @@ const PlanSelection = () => {
           </span>{" "}
           Volver
         </a>
-
-        {/* Título y descripción */}
         <div className="text-center w-full max-w-[544px] mx-auto mb-8">
           <h2 className="text-[40px] leading-12 tracking-[-0.6px] font-semibold mb-2 max-md:text-[32px]">
             Rocío ¿Para quién deseas cotizar?
@@ -96,17 +91,13 @@ const PlanSelection = () => {
             Selecciona la opción que se ajuste más a tus necesidades.
           </p>
         </div>
-
-        {/* Tarjetas de usuario */}
         <div className="max-w-[544px] w-full flex justify-between mx-auto flex-wrap gap-4 mb-8">
           {isLoading ? (
-            // Mostrar skeletons mientras carga
             <>
               <CustomerCardSkeleton />
               <CustomerCardSkeleton />
             </>
           ) : (
-            // Mostrar tarjetas reales cuando termina de cargar
             userMy.map((item, index) => (
               <CustomerCard
                 onChange={onChangeCustomerCard}
@@ -119,13 +110,10 @@ const PlanSelection = () => {
             ))
           )}
         </div>
-
-        {/* Tarjetas de planes */}
         {forWhom && (
           <div className="w-full flex justify-center mx-auto">
             <div className="max-w-[928px] w-full flex justify-around flex-wrap gap-4">
               {isLoading ? (
-                // Skeleton para planes
                 <>
                   <PlanCardSkeleton />
                   <PlanCardSkeleton />

@@ -33,10 +33,8 @@ const ContactForm = () => {
     },
   });
 
-  // Observar el valor del tipo de documento
   const selectedDocumentType = watch("typeDocument");
 
-  // Función para obtener validaciones dinámicas
   const getDocumentValidation = () => {
     const baseValidation = {
       required: "El número de documento es requerido",
@@ -46,7 +44,6 @@ const ContactForm = () => {
       },
     };
 
-    // Validaciones específicas según tipo de documento
     switch (selectedDocumentType) {
       case "1": // DNI
         return {
@@ -89,7 +86,6 @@ const ContactForm = () => {
     }
   };
 
-  // Función para obtener el placeholder dinámico
   const getPlaceholder = () => {
     switch (selectedDocumentType) {
       case "1":
@@ -109,15 +105,12 @@ const ContactForm = () => {
     console.log("Form data:", data);
     addUser(data);
     navigate("/seleccion-plan", { state: { back: "/" } });
-    // data.PrivacyPolicy será true/false
-    // data.CommercialCommunicationsPolicy será true/false
   };
 
   useEffect(() => {
     if (user) {
       console.log("Prellenando formulario con:", user);
 
-      // Prellenar cada campo si existe en user
       setValue("typeDocument", user.typeDocument || "1");
       setValue("documentNumber", user.documentNumber || "");
       setValue("phone", user.phone || "");
